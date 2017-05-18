@@ -32,20 +32,29 @@ var Spaceship = (function () {
         }
         else if (e.keyCode == 83) {
             console.log("s");
-            this.speed -= this.posY;
+            this.direction = 'down';
         }
         else if (e.keyCode == 65) {
             console.log("a");
-            this.speed -= this.posX;
+            this.direction = 'left';
         }
         else if (e.keyCode == 68) {
             console.log("d");
-            this.speed += this.posX;
+            this.direction = 'right';
         }
     };
     Spaceship.prototype.draw = function () {
         if (this.direction = 'up') {
-            this.speed += this.posY;
+            this.posY += this.speed;
+        }
+        else if (this.direction = 'down') {
+            this.posY -= this.speed;
+        }
+        else if (this.direction = 'left') {
+            this.posX -= this.speed;
+        }
+        else if (this.direction = 'right') {
+            this.posX += this.speed;
         }
         this.div.style.transform = "translate(" + this.posX + "px," + this.posY + "px)";
     };

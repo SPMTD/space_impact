@@ -26,22 +26,33 @@ class Spaceship {
         }
         else if(e.keyCode == 83) {
             console.log("s");
-            this.speed -= this.posY;
+            this.direction = 'down'
+            // console.log(this.direction);
+            
         }
         else if(e.keyCode == 65) {
             console.log("a");
-            this.speed -= this.posX;
+            this.direction = 'left';
         }
         else if(e.keyCode == 68) {
             console.log("d");
-            this.speed += this.posX;
+            this.direction = 'right';
         }
 
     }
 
     public draw():void {
         if(this.direction = 'up'){
-            this.speed += this.posY;
+            this.posY += this.speed;
+        }
+        else if(this.direction = 'down') {
+            this.posY -= this.speed;
+        }
+        else if(this.direction = 'left') {
+            this.posX -= this.speed;
+        }
+        else if(this.direction = 'right') {
+            this.posX += this.speed;
         }
 
 
