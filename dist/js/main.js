@@ -20,12 +20,14 @@ var Spaceship = (function () {
         var _this = this;
         this.div = document.createElement("spaceship");
         parent.appendChild(this.div);
-        this.speed = 2;
+        this.speed = 0;
         this.posX = 200;
         this.posY = 200;
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
+        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
     }
     Spaceship.prototype.onKeyDown = function (e) {
+        console.log(e);
         if (e.keyCode == 87) {
             console.log("w");
             this.direction = 'up';
@@ -42,19 +44,36 @@ var Spaceship = (function () {
             console.log("d");
             this.direction = 'right';
         }
+        else {
+            this.direction = 'stopped';
+        }
+    };
+    Spaceship.prototype.onKeyUp = function (e) {
+        if (this.onKeyUp) {
+            this.direction = 'stopped';
+        }
     };
     Spaceship.prototype.draw = function () {
-        if (this.direction = 'up') {
-            this.posY += this.speed;
-        }
-        else if (this.direction = 'down') {
+        if (this.direction == 'up') {
+            this.speed = 3;
             this.posY -= this.speed;
         }
-        else if (this.direction = 'left') {
+        else if (this.direction == 'down') {
+            this.speed = 3;
+            this.posY += this.speed;
+        }
+        else if (this.direction == 'left') {
+            this.speed = 3;
             this.posX -= this.speed;
         }
-        else if (this.direction = 'right') {
+        else if (this.direction == 'right') {
+            this.speed = 3;
             this.posX += this.speed;
+        }
+        else if (this.direction == 'stopped') {
+            this.speed = 0;
+            this.posX += this.speed;
+            this.posY += this.speed;
         }
         this.div.style.transform = "translate(" + this.posX + "px," + this.posY + "px)";
     };
