@@ -1,21 +1,3 @@
-var Game = (function () {
-    function Game() {
-        var _this = this;
-        var container = document.getElementById("container");
-        this.spaceship = new Spaceship(container);
-        this.bullet = new Bullet(container);
-        requestAnimationFrame(function () { return _this.gameLoop(); });
-    }
-    Game.prototype.gameLoop = function () {
-        var _this = this;
-        this.spaceship.draw();
-        requestAnimationFrame(function () { return _this.gameLoop(); });
-    };
-    return Game;
-}());
-window.addEventListener("load", function () {
-    var g = new Game();
-});
 var Spaceship = (function () {
     function Spaceship(parent) {
         var _this = this;
@@ -45,11 +27,12 @@ var Spaceship = (function () {
             console.log("d");
             this.direction = 'right';
         }
-        else if (e.keyCode == 32) {
-            console.log("shooting");
-        }
         else {
             this.direction = 'stopped';
+        }
+        if (e.keyCode == 32) {
+            console.log("shooting");
+            this.shooting(true);
         }
     };
     Spaceship.prototype.onKeyUp = function (e) {
@@ -57,7 +40,12 @@ var Spaceship = (function () {
             this.direction = 'stopped';
         }
     };
-    Spaceship.prototype.shooting = function () {
+    Spaceship.prototype.shooting = function (bulletShooting) {
+        var container = document.getElementById("container");
+        if (bulletShooting == true) {
+            this.bullet = new Bullet(container);
+            Bullet.prototype.draw();
+        }
     };
     Spaceship.prototype.draw = function () {
         if (this.direction == 'up') {
@@ -85,4 +73,35 @@ var Spaceship = (function () {
     };
     return Spaceship;
 }());
+var Bullet = (function () {
+    function Bullet(parent) {
+        this.div = document.createElement("bullet");
+        parent.appendChild(this.div);
+        this.speed = 5;
+        this.posX = 300;
+        this.posY = 300;
+    }
+    Bullet.prototype.draw = function () {
+        console.log(Spaceship.prototype.bulletShooting);
+        this.div.style.transform = "translate(" + this.posX + "px, " + this.posY + "px)";
+    };
+    return Bullet;
+}());
+var Game = (function () {
+    function Game() {
+        var _this = this;
+        var container = document.getElementById("container");
+        this.spaceship = new Spaceship(container);
+        requestAnimationFrame(function () { return _this.gameLoop(); });
+    }
+    Game.prototype.gameLoop = function () {
+        var _this = this;
+        this.spaceship.draw();
+        requestAnimationFrame(function () { return _this.gameLoop(); });
+    };
+    return Game;
+}());
+window.addEventListener("load", function () {
+    var g = new Game();
+});
 //# sourceMappingURL=main.js.map

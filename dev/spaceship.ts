@@ -1,10 +1,12 @@
 class Spaceship {
     
-    public speed: number;
-    public div: HTMLElement;
+    private speed: number;
+    private div: HTMLElement;
     public posX: number;
     public posY: number;
-    public direction: string;
+    private direction: string;
+    public bulletShooting: boolean;
+    private bullet: Bullet;
 
     constructor(parent: HTMLElement) {
         this.div = document.createElement("spaceship");
@@ -39,11 +41,13 @@ class Spaceship {
             console.log("d");
             this.direction = 'right';
         }
-        else if(e.keyCode == 32) {
-            console.log("shooting");
-        }
         else {
             this.direction = 'stopped';
+        }
+
+        if(e.keyCode == 32) {
+            console.log("shooting");
+            this.shooting(true);
         }
 
     }
@@ -54,8 +58,12 @@ class Spaceship {
         }
     }
 
-    private shooting():void {
-        
+    private shooting(bulletShooting):void {
+        let container = document.getElementById("container");
+        if(bulletShooting == true) {
+            this.bullet = new Bullet(container)
+            Bullet.prototype.draw();
+        }
     }
 
     public draw():void {
@@ -83,6 +91,7 @@ class Spaceship {
             this.posY += this.speed;
         }
         // console.log(this.direction);
+        
 
         this.div.style.transform = "translate("+ this.posX +"px,"+ this.posY+"px)";
     }

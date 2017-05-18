@@ -1,3 +1,7 @@
+/// <reference path="spaceship.ts" />
+/// <reference path="bullet.ts" />
+
+
 class Game {
 
     private spaceship : Spaceship;
@@ -6,7 +10,7 @@ class Game {
     constructor() {
         let container = document.getElementById("container");
         this.spaceship = new Spaceship(container);
-        this.bullet = new Bullet(container);
+        // this.bullet = new Bullet(container);
 
 
         requestAnimationFrame(() => this.gameLoop());

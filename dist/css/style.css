@@ -27,3 +27,9 @@ spaceship {
     height: 63px;
     width: 83px;
 }
+
+bullet {
+    background-image: url("../images/Space_impact_bullet.png");
+    height: 20px;
+    width: 30px;
+}
