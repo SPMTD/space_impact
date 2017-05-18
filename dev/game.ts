@@ -1,10 +1,12 @@
 class Game {
 
     private spaceship : Spaceship;
+    private bullet : Bullet;
 
     constructor() {
         let container = document.getElementById("container");
         this.spaceship = new Spaceship(container);
+        this.bullet = new Bullet(container);
 
 
         requestAnimationFrame(() => this.gameLoop());

@@ -1,5 +1,5 @@
 body {
-    background-color: #fff;
+    background-color: #000;
     font-family: Arial, Helvetica, sans-serif;
     overflow:hidden;
     margin:0px; padding:0px;
@@ -15,6 +15,7 @@ body * {
 }
 
 container {
+    background-color: #548E31;
     width:800px; height:600px;
     left: 50%; top: 50%;
     transform: translate(-50%, -50%);

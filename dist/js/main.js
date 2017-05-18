@@ -3,6 +3,7 @@ var Game = (function () {
         var _this = this;
         var container = document.getElementById("container");
         this.spaceship = new Spaceship(container);
+        this.bullet = new Bullet(container);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
     Game.prototype.gameLoop = function () {
@@ -44,6 +45,9 @@ var Spaceship = (function () {
             console.log("d");
             this.direction = 'right';
         }
+        else if (e.keyCode == 32) {
+            console.log("shooting");
+        }
         else {
             this.direction = 'stopped';
         }
@@ -52,6 +56,8 @@ var Spaceship = (function () {
         if (this.onKeyUp) {
             this.direction = 'stopped';
         }
+    };
+    Spaceship.prototype.shooting = function () {
     };
     Spaceship.prototype.draw = function () {
         if (this.direction == 'up') {

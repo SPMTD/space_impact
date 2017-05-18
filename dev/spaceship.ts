@@ -39,6 +39,9 @@ class Spaceship {
             console.log("d");
             this.direction = 'right';
         }
+        else if(e.keyCode == 32) {
+            console.log("shooting");
+        }
         else {
             this.direction = 'stopped';
         }
@@ -49,6 +52,10 @@ class Spaceship {
         if(this.onKeyUp) {
             this.direction = 'stopped';
         }
+    }
+
+    private shooting():void {
+        
     }
 
     public draw():void {
