@@ -1,6 +1,8 @@
+/// <reference path="bullet.ts" />
+
 class Spaceship {
     
-    private speed: number;
+    public speed: number;
     private div: HTMLElement;
     public posX: number;
     public posY: number;
@@ -21,27 +23,28 @@ class Spaceship {
     }
 
     private onKeyDown(e: KeyboardEvent):void {
-        console.log(e);
+        // console.log(e);
 
         if(e.keyCode == 87) {
-            console.log("w")
+            // console.log("w")
             this.direction = 'up'
         }
         else if(e.keyCode == 83) {
-            console.log("s");
+            // console.log("s");
             this.direction = 'down'
             // console.log(this.direction);
             
         }
         else if(e.keyCode == 65) {
-            console.log("a");
+            // console.log("a");
             this.direction = 'left';
         }
         else if(e.keyCode == 68) {
-            console.log("d");
+            // console.log("d");
             this.direction = 'right';
         }
         else {
+            this.shooting(false);
             this.direction = 'stopped';
         }
 
@@ -58,11 +61,11 @@ class Spaceship {
         }
     }
 
-    private shooting(bulletShooting):void {
+    public shooting(bulletShooting):void {
         let container = document.getElementById("container");
         if(bulletShooting == true) {
-            this.bullet = new Bullet(container)
-            Bullet.prototype.draw();
+            this.bullet = new Bullet(container);
+            Bullet.prototype.draw(this.posX, this.posY);
         }
     }
 

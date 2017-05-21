@@ -10,24 +10,20 @@ var Spaceship = (function () {
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
     }
     Spaceship.prototype.onKeyDown = function (e) {
-        console.log(e);
         if (e.keyCode == 87) {
-            console.log("w");
             this.direction = 'up';
         }
         else if (e.keyCode == 83) {
-            console.log("s");
             this.direction = 'down';
         }
         else if (e.keyCode == 65) {
-            console.log("a");
             this.direction = 'left';
         }
         else if (e.keyCode == 68) {
-            console.log("d");
             this.direction = 'right';
         }
         else {
+            this.shooting(false);
             this.direction = 'stopped';
         }
         if (e.keyCode == 32) {
@@ -44,7 +40,7 @@ var Spaceship = (function () {
         var container = document.getElementById("container");
         if (bulletShooting == true) {
             this.bullet = new Bullet(container);
-            Bullet.prototype.draw();
+            Bullet.prototype.draw(this.posX, this.posY);
         }
     };
     Spaceship.prototype.draw = function () {
@@ -77,13 +73,13 @@ var Bullet = (function () {
     function Bullet(parent) {
         this.div = document.createElement("bullet");
         parent.appendChild(this.div);
-        this.speed = 5;
+        this.speed = 0;
         this.posX = 300;
         this.posY = 300;
     }
-    Bullet.prototype.draw = function () {
-        console.log(Spaceship.prototype.bulletShooting);
-        this.div.style.transform = "translate(" + this.posX + "px, " + this.posY + "px)";
+    Bullet.prototype.draw = function (posX, posY) {
+        this.posX += this.speed;
+        this.div.style.transform = "translate(" + this.posX + "px," + this.posY + "px)";
     };
     return Bullet;
 }());
@@ -97,6 +93,7 @@ var Game = (function () {
     Game.prototype.gameLoop = function () {
         var _this = this;
         this.spaceship.draw();
+        this.spaceship.shooting(false);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };
     return Game;
