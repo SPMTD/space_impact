@@ -18,7 +18,6 @@ class Game {
 
     private gameLoop(){
         this.spaceship.draw();
-        this.spaceship.shooting(false);
 
         requestAnimationFrame(() => this.gameLoop());
     }

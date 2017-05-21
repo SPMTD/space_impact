@@ -1,3 +1,13 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var Spaceship = (function () {
     function Spaceship(parent) {
         var _this = this;
@@ -13,22 +23,21 @@ var Spaceship = (function () {
         if (e.keyCode == 87) {
             this.direction = 'up';
         }
-        else if (e.keyCode == 83) {
+        if (e.keyCode == 83) {
             this.direction = 'down';
         }
-        else if (e.keyCode == 65) {
+        if (e.keyCode == 65) {
             this.direction = 'left';
         }
-        else if (e.keyCode == 68) {
+        if (e.keyCode == 68) {
             this.direction = 'right';
-        }
-        else {
-            this.shooting(false);
-            this.direction = 'stopped';
         }
         if (e.keyCode == 32) {
             console.log("shooting");
-            this.shooting(true);
+            this.shooting();
+        }
+        else {
+            this.direction = 'stopped';
         }
     };
     Spaceship.prototype.onKeyUp = function (e) {
@@ -36,12 +45,11 @@ var Spaceship = (function () {
             this.direction = 'stopped';
         }
     };
-    Spaceship.prototype.shooting = function (bulletShooting) {
+    Spaceship.prototype.shooting = function () {
         var container = document.getElementById("container");
-        if (bulletShooting == true) {
-            this.bullet = new Bullet(container);
-            Bullet.prototype.draw(this.posX, this.posY);
-        }
+        this.div = document.createElement("bullet");
+        this.bullet = new Bullet(container);
+        this.bullet.draw();
     };
     Spaceship.prototype.draw = function () {
         if (this.direction == 'up') {
@@ -69,20 +77,21 @@ var Spaceship = (function () {
     };
     return Spaceship;
 }());
-var Bullet = (function () {
+var Bullet = (function (_super) {
+    __extends(Bullet, _super);
     function Bullet(parent) {
-        this.div = document.createElement("bullet");
-        parent.appendChild(this.div);
-        this.speed = 0;
-        this.posX = 300;
-        this.posY = 300;
+        var _this = _super.call(this, parent) || this;
+        _this.speed = 0;
+        1;
+        return _this;
     }
-    Bullet.prototype.draw = function (posX, posY) {
+    Bullet.prototype.draw = function () {
         this.posX += this.speed;
         this.div.style.transform = "translate(" + this.posX + "px," + this.posY + "px)";
+        console.log(this.posX, this.posY);
     };
     return Bullet;
-}());
+}(Spaceship));
 var Game = (function () {
     function Game() {
         var _this = this;
@@ -93,7 +102,6 @@ var Game = (function () {
     Game.prototype.gameLoop = function () {
         var _this = this;
         this.spaceship.draw();
-        this.spaceship.shooting(false);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };
     return Game;
