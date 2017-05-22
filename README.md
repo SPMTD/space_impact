@@ -22,6 +22,7 @@ Enjoy!
 
 ## Programmeer principes
 Dit project is compleet gemaakt in OOP, typescript.
+### Gebruikte programmeer principes
 #### interface
 #### static utility method
 #### singleton
