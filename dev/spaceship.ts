@@ -1,6 +1,8 @@
 /// <reference path="gameobject.ts" />
-
 /// <reference path="bullet.ts" />
+/// <reference path="behaviour.ts" />
+/// <reference path="moving.ts" />
+
 
 class Spaceship extends GameObject{
     private gameobject: GameObject;

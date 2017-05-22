@@ -77,6 +77,22 @@ var GameObject = (function () {
     });
     return GameObject;
 }());
+var Moving = (function () {
+    function Moving(s, object) {
+        this.speed = s;
+    }
+    Moving.prototype.onKeyDown = function (e) {
+    };
+    Moving.prototype.onKeyUp = function (e) {
+    };
+    Moving.prototype.move = function (object, speed) {
+        object.posY = object.posY + speed;
+    };
+    Moving.prototype.draw = function (object) {
+        object.div.style.transform = "translate(" + object.posX + "px, " + object.posY + "px)";
+    };
+    return Moving;
+}());
 var Spaceship = (function (_super) {
     __extends(Spaceship, _super);
     function Spaceship(parent) {
