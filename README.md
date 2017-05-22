@@ -22,4 +22,10 @@ Enjoy!
 
 ## Programmeer principes
 Dit project is compleet gemaakt in OOP, typescript.
-Er word gebruikt gemaakt van Strategy pattern en Singleton.
+#### interface
+#### static utility method
+#### singleton
+#### strategy
+#### Inheritance
+#### Composition
+#### Encapsulation
