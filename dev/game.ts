@@ -19,7 +19,6 @@ class Game {
 
     public createBullet(b: Bullet) {
         this.bullet.push(b);
-        console.log("created bullet");
     }
 
 

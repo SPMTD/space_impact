@@ -12,6 +12,66 @@ var GameObject = (function () {
     function GameObject() {
         this.container = document.getElementById("container");
     }
+    Object.defineProperty(GameObject.prototype, "height", {
+        get: function () {
+            return this._height;
+        },
+        set: function (v) {
+            this._height = v;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GameObject.prototype, "width", {
+        get: function () {
+            return this._width;
+        },
+        set: function (v) {
+            this._width = v;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GameObject.prototype, "div", {
+        get: function () {
+            return this._div;
+        },
+        set: function (v) {
+            this._div = v;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GameObject.prototype, "x", {
+        get: function () {
+            return this._posX;
+        },
+        set: function (v) {
+            this._posX = v;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GameObject.prototype, "y", {
+        get: function () {
+            return this._posY;
+        },
+        set: function (v) {
+            this._posY = v;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GameObject.prototype, "speed", {
+        get: function () {
+            return this._speed;
+        },
+        set: function (v) {
+            this._speed = v;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return GameObject;
 }());
 var Spaceship = (function (_super) {
@@ -21,61 +81,61 @@ var Spaceship = (function (_super) {
         _this.div = document.createElement("spaceship");
         parent.appendChild(_this.div);
         _this.speed = 0;
-        _this.posX = 200;
-        _this.posY = 200;
+        _this._posX = 200;
+        _this._posY = 200;
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
         return _this;
     }
     Spaceship.prototype.onKeyDown = function (e) {
         if (e.keyCode == 87) {
-            this.direction = 'up';
+            this._direction = 'up';
         }
         else if (e.keyCode == 83) {
-            this.direction = 'down';
+            this._direction = 'down';
         }
         else if (e.keyCode == 65) {
-            this.direction = 'left';
+            this._direction = 'left';
         }
         else if (e.keyCode == 68) {
-            this.direction = 'right';
+            this._direction = 'right';
         }
         else if (e.keyCode == 32) {
-            var b = new Bullet(this.div, this.posX, this.posY);
-            return;
+            var b = new Bullet(this.container, this._posX, this._posY);
+            Game.getInstance().createBullet(b);
         }
         else {
-            this.direction = 'stopped';
+            this._direction = 'stopped';
         }
     };
     Spaceship.prototype.onKeyUp = function (e) {
         if (this.onKeyUp) {
-            this.direction = 'stopped';
+            this._direction = 'stopped';
         }
     };
     Spaceship.prototype.draw = function () {
-        if (this.direction == 'up') {
+        if (this._direction == 'up') {
+            this._speed = 3;
+            this._posY -= this.speed;
+        }
+        else if (this._direction == 'down') {
+            this._speed = 3;
+            this._posY += this.speed;
+        }
+        else if (this._direction == 'left') {
             this.speed = 3;
-            this.posY -= this.speed;
+            this._posX -= this.speed;
         }
-        else if (this.direction == 'down') {
+        else if (this._direction == 'right') {
             this.speed = 3;
-            this.posY += this.speed;
+            this._posX += this.speed;
         }
-        else if (this.direction == 'left') {
-            this.speed = 3;
-            this.posX -= this.speed;
+        else if (this._direction == 'stopped') {
+            this._speed = 0;
+            this._posX += this.speed;
+            this._posY += this.speed;
         }
-        else if (this.direction == 'right') {
-            this.speed = 3;
-            this.posX += this.speed;
-        }
-        else if (this.direction == 'stopped') {
-            this.speed = 0;
-            this.posX += this.speed;
-            this.posY += this.speed;
-        }
-        this.div.style.transform = "translate(" + this.posX + "px," + this.posY + "px)";
+        this.div.style.transform = "translate(" + this._posX + "px," + this._posY + "px)";
     };
     return Spaceship;
 }(GameObject));
@@ -83,10 +143,10 @@ var Bullet = (function (_super) {
     __extends(Bullet, _super);
     function Bullet(parent, posX, posY) {
         var _this = _super.call(this) || this;
-        _this.speed = 10;
-        _this.posX = posX;
-        _this.posY = posY;
-        _this.div = document.createElement("bullet");
+        _this._speed = 10;
+        _this._posX = posX + _this._width;
+        _this._posY = posY + (_this._height / 2);
+        _this._div = document.createElement("bullet");
         parent.appendChild(_this.div);
         return _this;
     }
@@ -102,7 +162,6 @@ var Game = (function () {
     }
     Game.prototype.createBullet = function (b) {
         this.bullet.push(b);
-        console.log("created bullet");
     };
     Game.prototype.gameLoop = function () {
         var _this = this;
