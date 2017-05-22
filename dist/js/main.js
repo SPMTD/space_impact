@@ -156,6 +156,13 @@ var Bullet = (function (_super) {
     };
     return Bullet;
 }(GameObject));
+var Enemies = (function (_super) {
+    __extends(Enemies, _super);
+    function Enemies() {
+        return _super.call(this) || this;
+    }
+    return Enemies;
+}(GameObject));
 var Game = (function () {
     function Game() {
         var _this = this;
@@ -191,4 +198,25 @@ var Game = (function () {
 window.addEventListener("load", function () {
     var g = Game.getInstance();
 });
+var Utils = (function () {
+    function Utils() {
+    }
+    Utils.checkCollision = function (object1, object2) {
+        return (object1.x < object2.x + object2.width &&
+            object1.x + object1.width > object2.x &&
+            object1.y < object2.y + object2.height &&
+            object1.height + object1.y > object2.y);
+    };
+    Utils.removeFromArray = function (object, arrayObject) {
+        for (var i = 0; i < arrayObject.length; i++) {
+            if (arrayObject[i] === object) {
+                arrayObject.splice(i, 1);
+            }
+        }
+    };
+    Utils.removeObject = function (o, arrayObject) {
+        Utils.removeFromArray(o, arrayObject);
+    };
+    return Utils;
+}());
 //# sourceMappingURL=main.js.map
