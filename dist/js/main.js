@@ -86,10 +86,11 @@ var Moving = (function () {
     Moving.prototype.onKeyUp = function (e) {
     };
     Moving.prototype.move = function (object, speed) {
-        object.posY = object.posY + speed;
+        object.y = object.y + speed;
+        object.x = object.x + speed;
     };
     Moving.prototype.draw = function (object) {
-        object.div.style.transform = "translate(" + object.posX + "px, " + object.posY + "px)";
+        object.div.style.transform = "translate(" + object.y + "px, " + object.x + "px)";
     };
     return Moving;
 }());
@@ -99,9 +100,9 @@ var Spaceship = (function (_super) {
         var _this = _super.call(this) || this;
         _this.div = document.createElement("spaceship");
         parent.appendChild(_this.div);
-        _this.speed = 0;
-        _this._posX = 200;
-        _this._posY = 200;
+        _this.speed = 5;
+        _this.x = 200;
+        _this.y = 200;
         _this.behaviour = new Moving(_this.speed, _this);
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
@@ -109,16 +110,16 @@ var Spaceship = (function (_super) {
     }
     Spaceship.prototype.onKeyDown = function (e) {
         if (e.keyCode == 87) {
-            this._posY = this._posY - this.speed;
+            this.x = this.x - this.speed;
         }
         else if (e.keyCode == 83) {
-            this._posY = this._posY + this.speed;
+            this.x = this.x + this.speed;
         }
         else if (e.keyCode == 65) {
-            this._posX = this._posX - this.speed;
+            this.y = this.y - this.speed;
         }
         else if (e.keyCode == 68) {
-            this._posX = this._posX + this.speed;
+            this.y = this.y + this.speed;
         }
         else if (e.keyCode == 32) {
             var b = new Bullet(this.container, this._posX, this._posY);

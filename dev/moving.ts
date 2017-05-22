@@ -16,10 +16,11 @@ class Moving implements Behaviour {
     }
 
     move(object: any, speed):void {
-        object.posY = object.posY + speed;
+        object.y = object.y + speed;
+        object.x = object.x + speed;
     }
 
     public draw(object) {
-        object.div.style.transform = "translate(" + object.posX + "px, " + object.posY + "px)";
+        object.div.style.transform = "translate(" + object.y + "px, " + object.x + "px)";
     }
 }
