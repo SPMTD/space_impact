@@ -6,6 +6,7 @@ class Game {
 
     private spaceship : Spaceship;
     private bullet : Bullet;
+    public static instance: Game;
 
     constructor() {
         let container = document.getElementById("container");
@@ -21,10 +22,17 @@ class Game {
 
         requestAnimationFrame(() => this.gameLoop());
     }
+
+    public static getInstance() {
+        if(!Game.instance) {
+            Game.instance = new Game();
+        }
+        return Game.instance;
+    }
 } 
 
 
 // load
 window.addEventListener("load", function() {
-    let g:Game = new Game();
+    let g:Game = Game.getInstance();
 });

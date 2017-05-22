@@ -1,16 +1,15 @@
+/// <reference path="gameobject.ts" />
+
 /// <reference path="bullet.ts" />
 
-class Spaceship {
-    
-    public speed: number;
+class Spaceship extends GameObject{
+    private gameobject: GameObject;
     public div: HTMLElement;
-    public posX: number;
-    public posY: number;
-    private direction: string;
     public bulletShooting: boolean;
     private bullet: Bullet;
 
     constructor(parent: HTMLElement) {
+        super();
         this.div = document.createElement("spaceship");
         parent.appendChild(this.div);
 
@@ -26,7 +25,7 @@ class Spaceship {
         // console.log(e);
         // switch(e.keyCode) {
         //     case 1:
-        //         keyCode = "87";
+        //         e.keyCode = "87";
         //         break;
         // }
 
@@ -34,23 +33,24 @@ class Spaceship {
             // console.log("w")
             this.direction = 'up'
         }
-        if(e.keyCode == 83) {
+        else if(e.keyCode == 83) {
             // console.log("s");
             this.direction = 'down'
             // console.log(this.direction);
             
         }
-        if(e.keyCode == 65) {
+        else if(e.keyCode == 65) {
             // console.log("a");
             this.direction = 'left';
         }
-        if(e.keyCode == 68) {
+        else if(e.keyCode == 68) {
             // console.log("d");
             this.direction = 'right';
         }
-        if(e.keyCode == 32) {
+        else if(e.keyCode == 32) {
             console.log("shooting");
             this.shooting();
+            return;
         }
         else {
             this.direction = 'stopped';
@@ -65,10 +65,7 @@ class Spaceship {
     }
 
     private shooting():void {
-       let container = document.getElementById("container");
-       this.div = document.createElement("bullet");
-       this.bullet = new Bullet(container);
-       this.bullet.draw();
+       this.bullet = new Bullet();
     }
 
     public draw():void {
