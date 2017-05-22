@@ -5,21 +5,21 @@ Space impact is een oud spel dat vroeger gespeeld kon worden op de nokia telefoo
 Ik heb dat vroeger veel gespeeld en vroeg me af of ik het ook kon maken.
 Dit project is gestart als project voor PRG08.
 
-##installatie
+## installatie
 Om dit spel te installeren clone / download je deze repository.
 
-###voor windows
+### voor windows
 clone / download de repository in xampp/htdocs
 Zet je Apacheserver aan en ga naar localhost/space_impact/dist
 Enjoy!.
 
-###voor linux
+### voor linux
 Clone / download de repository naar var/www/html
 Zet je Apacheserver aan en ga naar localhost/space_impact/dist
 Enjoy!
 
-###of ga naar de website https://stud.hosted.hr.nl/0910256/sites/space_impact/
+### of ga naar de website https://stud.hosted.hr.nl/0910256/sites/space_impact/
 
-##Programmeer principes
+## Programmeer principes
 Dit project is compleet gemaakt in OOP, typescript.
 Er word gebruikt gemaakt van Strategy pattern en Singleton.
