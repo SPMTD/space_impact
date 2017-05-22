@@ -13,6 +13,10 @@ class GameObject {
 
     }
 
+    public removeMe(): void {
+        this.div.remove();
+    }
+
     public get height(): number {
         return this._height
     }

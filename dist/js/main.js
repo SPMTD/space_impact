@@ -12,6 +12,9 @@ var GameObject = (function () {
     function GameObject() {
         this.container = document.getElementById("container");
     }
+    GameObject.prototype.removeMe = function () {
+        this.div.remove();
+    };
     Object.defineProperty(GameObject.prototype, "height", {
         get: function () {
             return this._height;
@@ -90,52 +93,27 @@ var Spaceship = (function (_super) {
     }
     Spaceship.prototype.onKeyDown = function (e) {
         if (e.keyCode == 87) {
-            this._direction = 'up';
+            this._posY = this._posY - this.speed;
         }
         else if (e.keyCode == 83) {
-            this._direction = 'down';
+            this._posY = this._posY + this.speed;
         }
         else if (e.keyCode == 65) {
-            this._direction = 'left';
+            this._posX = this._posX - this.speed;
         }
         else if (e.keyCode == 68) {
-            this._direction = 'right';
+            this._posX = this._posX + this.speed;
         }
         else if (e.keyCode == 32) {
             var b = new Bullet(this.container, this._posX, this._posY);
             Game.getInstance().createBullet(b);
         }
-        else {
-            this._direction = 'stopped';
-        }
     };
     Spaceship.prototype.onKeyUp = function (e) {
         if (this.onKeyUp) {
-            this._direction = 'stopped';
         }
     };
     Spaceship.prototype.draw = function () {
-        if (this._direction == 'up') {
-            this._speed = 3;
-            this._posY -= this.speed;
-        }
-        else if (this._direction == 'down') {
-            this._speed = 3;
-            this._posY += this.speed;
-        }
-        else if (this._direction == 'left') {
-            this.speed = 3;
-            this._posX -= this.speed;
-        }
-        else if (this._direction == 'right') {
-            this.speed = 3;
-            this._posX += this.speed;
-        }
-        else if (this._direction == 'stopped') {
-            this._speed = 0;
-            this._posX += this.speed;
-            this._posY += this.speed;
-        }
         this.behaviour.draw(this);
     };
     return Spaceship;
@@ -164,8 +142,8 @@ var Game = (function () {
     function Game() {
         var _this = this;
         this.bullet = new Array();
-        var container = document.getElementById("container");
-        this.spaceship = new Spaceship(container);
+        this.container = document.getElementById("container");
+        this.spaceship = new Spaceship(this.container);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
     Game.prototype.createBullet = function (b) {

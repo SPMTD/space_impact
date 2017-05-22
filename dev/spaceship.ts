@@ -35,62 +35,60 @@ class Spaceship extends GameObject{
 
         if(e.keyCode == 87) {
             // console.log("w")
-            this._direction = 'up'
+            // this._direction = 'up'
+            this._posY = this._posY - this.speed;
         }
         else if(e.keyCode == 83) {
             // console.log("s");
-            this._direction = 'down'
-            // console.log(this.direction);
-            
+            // this._direction = 'down'
+            this._posY = this._posY + this.speed;
         }
         else if(e.keyCode == 65) {
             // console.log("a");
-            this._direction = 'left';
+            // this._direction = 'left';
+            this._posX = this._posX - this.speed;
         }
         else if(e.keyCode == 68) {
             // console.log("d");
-            this._direction = 'right';
+            // this._direction = 'right';
+            this._posX = this._posX + this.speed;
         }
         else if(e.keyCode == 32) {
             let b = new Bullet(this.container, this._posX, this._posY);
             Game.getInstance().createBullet(b);
-        }
-        else {
-            this._direction = 'stopped';
         }
 
     }
 
     private onKeyUp(e: KeyboardEvent) :void {
         if(this.onKeyUp) {
-            this._direction = 'stopped';
         }
     }
 
     public draw():void {
         // console.log(this.direction);
 
-        if(this._direction == 'up'){
-            this._speed = 3;
-            this._posY -= this.speed;
-        }
-        else if(this._direction == 'down') {
-            this._speed = 3;
-            this._posY += this.speed;
-        }
-        else if(this._direction == 'left') {
-            this.speed = 3;
-            this._posX -= this.speed;
-        }
-        else if(this._direction == 'right') {
-            this.speed = 3;
-            this._posX += this.speed;
-        }
-        else if(this._direction == 'stopped'){
-            this._speed = 0;
-            this._posX += this.speed;
-            this._posY += this.speed;
-        }
+        // if(this._direction == 'up'){
+        //     this._speed = 3;
+        //     this._posY -= this.speed;
+        // }
+        // else if(this._direction == 'down') {
+        //     this._speed = 3;
+        //     this._posY += this.speed;
+        // }
+        // else if(this._direction == 'left') {
+        //     this.speed = 3;
+        //     this._posX -= this.speed;
+        // }
+        // else if(this._direction == 'right') {
+        //     this.speed = 3;
+        //     this._posX += this.speed;
+        // }
+        // else if(this._direction == 'stopped'){
+        //     this._speed = 0;
+        //     this._posX += this.speed;
+        //     this._posY += this.speed;
+        // }
         // console.log(this.direction);
         
 

@@ -7,10 +7,10 @@ class Game {
     private spaceship : Spaceship;
     private bullet : Array<Bullet> = new Array<Bullet>();
     public static instance: Game;
+    private container = document.getElementById("container");
 
     constructor() {
-        let container = document.getElementById("container");
-        this.spaceship = new Spaceship(container);
+        this.spaceship = new Spaceship(this.container);
         // this.bullet = new Bullet(container);
 
 
