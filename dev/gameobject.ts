@@ -13,6 +13,10 @@ class GameObject {
 
     }
 
+    /**
+     * Removes selected div.
+     * E.G When bullet hits enemy or if the bullet flies out of the container.
+     */
     public removeMe(): void {
         this.div.remove();
     }

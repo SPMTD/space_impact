@@ -31,6 +31,11 @@ class Spaceship extends GameObject{
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e));
     }
 
+    /**
+     * Checks if the player pressed a key.
+     * Sprite movement.
+     * @param e 
+     */
     private onKeyDown(e: KeyboardEvent):void {
 
         if(e.keyCode == 87) {
@@ -52,6 +57,10 @@ class Spaceship extends GameObject{
 
     }
 
+    /**
+     * Checks if player let go of keys.
+     * @param e 
+     */
     private onKeyUp(e: KeyboardEvent) :void {
         if(this.onKeyUp) {
         }

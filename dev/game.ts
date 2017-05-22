@@ -15,11 +15,18 @@ class Game {
         requestAnimationFrame(() => this.gameLoop());
     }
 
+    /**
+     * Creates bullet when player presses space.
+     * @param b 
+     */
     public createBullet(b: Bullet) {
         this.bullet.push(b);
     }
 
 
+    /**
+     * GameLoop
+     */
     private gameLoop(){
         this.spaceship.draw();
 
@@ -34,6 +41,9 @@ class Game {
         requestAnimationFrame(() => this.gameLoop());
     }
 
+    /**
+     * Usage of singleton to create Game instance.
+     */
     public static getInstance() {
         if(!Game.instance) {
             Game.instance = new Game();
