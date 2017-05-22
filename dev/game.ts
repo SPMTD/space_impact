@@ -25,6 +25,14 @@ class Game {
     private gameLoop(){
         this.spaceship.draw();
 
+        for (let b of this.bullet) {
+            b.move();
+            b.draw();
+            if (b.y < 0) {
+                b.removeMe();
+            }
+        }
+
         requestAnimationFrame(() => this.gameLoop());
     }
 

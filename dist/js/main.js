@@ -83,6 +83,7 @@ var Spaceship = (function (_super) {
         _this.speed = 0;
         _this._posX = 200;
         _this._posY = 200;
+        _this.behaviour = new Moving(_this.speed, _this);
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
         return _this;
@@ -135,7 +136,7 @@ var Spaceship = (function (_super) {
             this._posX += this.speed;
             this._posY += this.speed;
         }
-        this.div.style.transform = "translate(" + this._posX + "px," + this._posY + "px)";
+        this.behaviour.draw(this);
     };
     return Spaceship;
 }(GameObject));
@@ -148,8 +149,15 @@ var Bullet = (function (_super) {
         _this._posY = posY + (_this._height / 2);
         _this._div = document.createElement("bullet");
         parent.appendChild(_this.div);
+        _this.behaviour = new Moving(_this.speed, _this);
         return _this;
     }
+    Bullet.prototype.move = function () {
+        this.behaviour.move(this, this.speed);
+    };
+    Bullet.prototype.draw = function () {
+        this.behaviour.draw(this);
+    };
     return Bullet;
 }(GameObject));
 var Game = (function () {
@@ -166,6 +174,14 @@ var Game = (function () {
     Game.prototype.gameLoop = function () {
         var _this = this;
         this.spaceship.draw();
+        for (var _i = 0, _a = this.bullet; _i < _a.length; _i++) {
+            var b = _a[_i];
+            b.move();
+            b.draw();
+            if (b.y < 0) {
+                b.removeMe();
+            }
+        }
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };
     Game.getInstance = function () {

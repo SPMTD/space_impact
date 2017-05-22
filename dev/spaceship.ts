@@ -8,6 +8,8 @@ class Spaceship extends GameObject{
     public bulletShooting: boolean;
     private bullet: Bullet;
 
+    public behaviour: Behaviour;
+
     constructor(parent: HTMLElement) {
         super();
         this.div = document.createElement("spaceship");
@@ -16,6 +18,8 @@ class Spaceship extends GameObject{
         this.speed = 0;
         this._posX = 200;
         this._posY = 200;
+
+        this.behaviour = new Moving(this.speed, this);
 
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e));
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e));
@@ -90,6 +94,6 @@ class Spaceship extends GameObject{
         // console.log(this.direction);
         
 
-        this.div.style.transform = "translate("+ this._posX +"px,"+ this._posY+"px)";
+        this.behaviour.draw(this);
     }
 }
