@@ -11,9 +11,7 @@ class Game {
 
     constructor() {
         this.spaceship = new Spaceship(this.container);
-        // this.bullet = new Bullet(container);
-
-
+        
         requestAnimationFrame(() => this.gameLoop());
     }
 

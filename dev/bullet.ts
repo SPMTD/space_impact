@@ -6,9 +6,9 @@ class Bullet extends GameObject{
 
     constructor(parent: HTMLElement, x: number, y: number) {
         super();
-        this._speed = 10;
-        this.x = x
-        this.y = y;
+        this.speed = 10;
+        this.x = x * 1.151;
+        this.y = y * 1.35;
 
         this._div = document.createElement("bullet");
         parent.appendChild(this.div);

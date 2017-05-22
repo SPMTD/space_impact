@@ -9,6 +9,8 @@ class Spaceship extends GameObject{
     public div: HTMLElement;
     public bulletShooting: boolean;
     private bullet: Bullet;
+    public width: number;
+    public height: number;
 
     public behaviour: Behaviour;
 
@@ -20,6 +22,8 @@ class Spaceship extends GameObject{
         this.speed = 5;
         this.x = 200;
         this.y = 200;
+        this.height = 63;
+        this.width = 83;
 
         this.behaviour = new Moving(this.speed, this);
 

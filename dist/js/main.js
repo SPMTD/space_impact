@@ -86,7 +86,6 @@ var Moving = (function () {
     Moving.prototype.onKeyUp = function (e) {
     };
     Moving.prototype.move = function (object, speed) {
-        object.x = object.x + speed;
         object.y = object.y + speed;
     };
     Moving.prototype.draw = function (object) {
@@ -103,6 +102,8 @@ var Spaceship = (function (_super) {
         _this.speed = 5;
         _this.x = 200;
         _this.y = 200;
+        _this.height = 63;
+        _this.width = 83;
         _this.behaviour = new Moving(_this.speed, _this);
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
@@ -139,9 +140,9 @@ var Bullet = (function (_super) {
     __extends(Bullet, _super);
     function Bullet(parent, x, y) {
         var _this = _super.call(this) || this;
-        _this._speed = 10;
-        _this.x = x;
-        _this.y = y;
+        _this.speed = 10;
+        _this.x = x * 1.151;
+        _this.y = y * 1.35;
         _this._div = document.createElement("bullet");
         parent.appendChild(_this.div);
         _this.behaviour = new Moving(_this.speed, _this);
