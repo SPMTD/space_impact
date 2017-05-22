@@ -42,7 +42,7 @@ class Spaceship extends GameObject{
             this.y = this.y + this.speed;
         }
         else if(e.keyCode == 32) {
-            let b = new Bullet(this.container, this._posX, this._posY);
+            let b = new Bullet(this.container, this.x, this.y);
             Game.getInstance().createBullet(b);
         }
 

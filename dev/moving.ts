@@ -16,8 +16,8 @@ class Moving implements Behaviour {
     }
 
     move(object: any, speed):void {
-        object.y = object.y + speed;
         object.x = object.x + speed;
+        object.y = object.y + speed;
     }
 
     public draw(object) {

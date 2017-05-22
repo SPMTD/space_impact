@@ -86,8 +86,8 @@ var Moving = (function () {
     Moving.prototype.onKeyUp = function (e) {
     };
     Moving.prototype.move = function (object, speed) {
-        object.y = object.y + speed;
         object.x = object.x + speed;
+        object.y = object.y + speed;
     };
     Moving.prototype.draw = function (object) {
         object.div.style.transform = "translate(" + object.y + "px, " + object.x + "px)";
@@ -122,7 +122,7 @@ var Spaceship = (function (_super) {
             this.y = this.y + this.speed;
         }
         else if (e.keyCode == 32) {
-            var b = new Bullet(this.container, this._posX, this._posY);
+            var b = new Bullet(this.container, this.x, this.y);
             Game.getInstance().createBullet(b);
         }
     };
@@ -137,11 +137,11 @@ var Spaceship = (function (_super) {
 }(GameObject));
 var Bullet = (function (_super) {
     __extends(Bullet, _super);
-    function Bullet(parent, posX, posY) {
+    function Bullet(parent, x, y) {
         var _this = _super.call(this) || this;
         _this._speed = 10;
-        _this._posX = posX + _this._width;
-        _this._posY = posY + (_this._height / 2);
+        _this.x = x;
+        _this.y = y;
         _this._div = document.createElement("bullet");
         parent.appendChild(_this.div);
         _this.behaviour = new Moving(_this.speed, _this);
@@ -173,7 +173,7 @@ var Game = (function () {
             var b = _a[_i];
             b.move();
             b.draw();
-            if (b.y < 0) {
+            if (b.y < 0 || b.y > 800 || b.x < 0 || b.x > 600) {
                 b.removeMe();
             }
         }

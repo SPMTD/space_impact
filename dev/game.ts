@@ -28,7 +28,7 @@ class Game {
         for (let b of this.bullet) {
             b.move();
             b.draw();
-            if (b.y < 0) {
+            if (b.y < 0 || b.y > 800 || b.x < 0 || b.x > 600) {
                 b.removeMe();
             }
         }

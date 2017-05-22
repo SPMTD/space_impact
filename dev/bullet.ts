@@ -4,16 +4,17 @@ class Bullet extends GameObject{
     private spaceship: Spaceship;
     private behaviour: Behaviour;
 
-    constructor(parent: HTMLElement, posX: number, posY: number) {
+    constructor(parent: HTMLElement, x: number, y: number) {
         super();
         this._speed = 10;
-        this._posX = posX + this._width;
-        this._posY = posY + (this._height / 2);
+        this.x = x
+        this.y = y;
 
         this._div = document.createElement("bullet");
         parent.appendChild(this.div);
 
         this.behaviour = new Moving(this.speed, this);
+        
     }
 
     public move(): void {
