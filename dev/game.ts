@@ -5,7 +5,7 @@
 class Game {
 
     private spaceship : Spaceship;
-    private bullet : Bullet;
+    private bullet : Array<Bullet> = new Array<Bullet>();
     public static instance: Game;
 
     constructor() {
@@ -16,6 +16,12 @@ class Game {
 
         requestAnimationFrame(() => this.gameLoop());
     }
+
+    public createBullet(b: Bullet) {
+        this.bullet.push(b);
+        console.log("created bullet");
+    }
+
 
     private gameLoop(){
         this.spaceship.draw();

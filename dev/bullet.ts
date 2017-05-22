@@ -1,16 +1,18 @@
 /// <reference path="spaceship.ts" />
 
-class Bullet extends Spaceship{
+class Bullet extends GameObject{
     private spaceship: Spaceship;
-    private bulletDiv: HTMLElement;
+    private div: HTMLElement;
     
 
-    constructor() {
-        super(Spaceship.prototype.div);
+    constructor(parent: HTMLElement, posX: number, posY: number) {
+        super();
 
-        this.div = document.getElementById("spaceship");
+        this.speed = 10;
+        this.posX = posX;
+        this.posY = posY;
 
-        this.bulletDiv = document.createElement("bullet");
-        this.div.appendChild(this.bulletDiv);
+        this.div = document.createElement("bullet");
+        parent.appendChild(this.div);
     }
 }

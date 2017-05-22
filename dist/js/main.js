@@ -10,6 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var GameObject = (function () {
     function GameObject() {
+        this.container = document.getElementById("container");
     }
     return GameObject;
 }());
@@ -40,8 +41,7 @@ var Spaceship = (function (_super) {
             this.direction = 'right';
         }
         else if (e.keyCode == 32) {
-            console.log("shooting");
-            this.shooting();
+            var b = new Bullet(this.div, this.posX, this.posY);
             return;
         }
         else {
@@ -52,9 +52,6 @@ var Spaceship = (function (_super) {
         if (this.onKeyUp) {
             this.direction = 'stopped';
         }
-    };
-    Spaceship.prototype.shooting = function () {
-        this.bullet = new Bullet();
     };
     Spaceship.prototype.draw = function () {
         if (this.direction == 'up') {
@@ -84,22 +81,29 @@ var Spaceship = (function (_super) {
 }(GameObject));
 var Bullet = (function (_super) {
     __extends(Bullet, _super);
-    function Bullet() {
-        var _this = _super.call(this, Spaceship.prototype.div) || this;
-        _this.div = document.getElementById("spaceship");
-        _this.bulletDiv = document.createElement("bullet");
-        _this.div.appendChild(_this.bulletDiv);
+    function Bullet(parent, posX, posY) {
+        var _this = _super.call(this) || this;
+        _this.speed = 10;
+        _this.posX = posX;
+        _this.posY = posY;
+        _this.div = document.createElement("bullet");
+        parent.appendChild(_this.div);
         return _this;
     }
     return Bullet;
-}(Spaceship));
+}(GameObject));
 var Game = (function () {
     function Game() {
         var _this = this;
+        this.bullet = new Array();
         var container = document.getElementById("container");
         this.spaceship = new Spaceship(container);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
+    Game.prototype.createBullet = function (b) {
+        this.bullet.push(b);
+        console.log("created bullet");
+    };
     Game.prototype.gameLoop = function () {
         var _this = this;
         this.spaceship.draw();

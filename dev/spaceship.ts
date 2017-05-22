@@ -48,8 +48,7 @@ class Spaceship extends GameObject{
             this.direction = 'right';
         }
         else if(e.keyCode == 32) {
-            console.log("shooting");
-            this.shooting();
+            let b = new Bullet(this.div, this.posX, this.posY)
             return;
         }
         else {
@@ -62,10 +61,6 @@ class Spaceship extends GameObject{
         if(this.onKeyUp) {
             this.direction = 'stopped';
         }
-    }
-
-    private shooting():void {
-       this.bullet = new Bullet();
     }
 
     public draw():void {
