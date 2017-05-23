@@ -204,16 +204,6 @@ var Utils = (function () {
             object1.y < object2.y + object2.height &&
             object1.height + object1.y > object2.y);
     };
-    Utils.removeFromArray = function (object, arrayObject) {
-        for (var i = 0; i < arrayObject.length; i++) {
-            if (arrayObject[i] === object) {
-                arrayObject.splice(i, 1);
-            }
-        }
-    };
-    Utils.removeObject = function (o, arrayObject) {
-        Utils.removeFromArray(o, arrayObject);
-    };
     return Utils;
 }());
 var Game = (function () {

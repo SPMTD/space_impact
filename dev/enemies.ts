@@ -2,6 +2,8 @@ class Enemies extends GameObject {
     
     public behaviour: Behaviour
     private randomY: number;
+    public x: number;
+    public y: number;
 
     constructor(parent: HTMLElement) {
         super();
