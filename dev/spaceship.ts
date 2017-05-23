@@ -7,10 +7,10 @@
 class Spaceship extends GameObject{
     private gameobject: GameObject;
     public div: HTMLElement;
-    public bulletShooting: boolean;
     private bullet: Bullet;
     public width: number;
     public height: number;
+    private hitpoints: number;
 
     public behaviour: Behaviour;
 
@@ -20,6 +20,7 @@ class Spaceship extends GameObject{
         parent.appendChild(this.div);
 
         this.speed = 5;
+        this.hitpoints = 10;
         this.x = 200;
         this.y = 200;
         this.height = 63;

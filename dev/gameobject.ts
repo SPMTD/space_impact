@@ -8,6 +8,7 @@ class GameObject {
     protected _width: number;
     protected _direction: string;
     protected container = document.getElementById("container");
+    protected _hitpoints: number;
 
     constructor() {
 
@@ -71,5 +72,13 @@ class GameObject {
 
     public set speed(v: number) {
         this._speed = v;
+    }
+    
+    public get hitpoints(): number {
+        return this._hitpoints;
+    }
+
+    public set hitpoints(v: number) {
+        this._hitpoints = v;
     }
 }

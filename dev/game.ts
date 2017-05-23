@@ -1,5 +1,6 @@
 /// <reference path="spaceship.ts" />
 /// <reference path="bullet.ts" />
+/// <reference path="utils.ts" />
 
 
 class Game {

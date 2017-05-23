@@ -75,6 +75,16 @@ var GameObject = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(GameObject.prototype, "hitpoints", {
+        get: function () {
+            return this._hitpoints;
+        },
+        set: function (v) {
+            this._hitpoints = v;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return GameObject;
 }());
 var Moving = (function () {
@@ -100,6 +110,7 @@ var Spaceship = (function (_super) {
         _this.div = document.createElement("spaceship");
         parent.appendChild(_this.div);
         _this.speed = 5;
+        _this.hitpoints = 10;
         _this.x = 200;
         _this.y = 200;
         _this.height = 63;
@@ -159,10 +170,40 @@ var Bullet = (function (_super) {
 var Enemies = (function (_super) {
     __extends(Enemies, _super);
     function Enemies() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.speed = 3;
+        _this.behaviour = new Moving(_this.speed, _this);
+        return _this;
     }
+    Enemies.prototype.gotHit = function (hit) {
+        if (hit) {
+            this.hitpoints -= 1;
+        }
+    };
     return Enemies;
 }(GameObject));
+var Utils = (function () {
+    function Utils() {
+    }
+    Utils.checkCollision = function (object1, object2) {
+        console.log(object1.x, object1.width, object2.x, object2.height);
+        return (object1.x < object2.x + object2.width &&
+            object1.x + object1.width > object2.x &&
+            object1.y < object2.y + object2.height &&
+            object1.height + object1.y > object2.y);
+    };
+    Utils.removeFromArray = function (object, arrayObject) {
+        for (var i = 0; i < arrayObject.length; i++) {
+            if (arrayObject[i] === object) {
+                arrayObject.splice(i, 1);
+            }
+        }
+    };
+    Utils.removeObject = function (o, arrayObject) {
+        Utils.removeFromArray(o, arrayObject);
+    };
+    return Utils;
+}());
 var Game = (function () {
     function Game() {
         var _this = this;
@@ -198,25 +239,4 @@ var Game = (function () {
 window.addEventListener("load", function () {
     var g = Game.getInstance();
 });
-var Utils = (function () {
-    function Utils() {
-    }
-    Utils.checkCollision = function (object1, object2) {
-        return (object1.x < object2.x + object2.width &&
-            object1.x + object1.width > object2.x &&
-            object1.y < object2.y + object2.height &&
-            object1.height + object1.y > object2.y);
-    };
-    Utils.removeFromArray = function (object, arrayObject) {
-        for (var i = 0; i < arrayObject.length; i++) {
-            if (arrayObject[i] === object) {
-                arrayObject.splice(i, 1);
-            }
-        }
-    };
-    Utils.removeObject = function (o, arrayObject) {
-        Utils.removeFromArray(o, arrayObject);
-    };
-    return Utils;
-}());
 //# sourceMappingURL=main.js.map
