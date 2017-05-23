@@ -10,7 +10,7 @@ class Spaceship extends GameObject{
     private bullet: Bullet;
     public width: number;
     public height: number;
-    private hitpoints: number;
+    public hitpointsdiv: HTMLElement;
 
     public behaviour: Behaviour;
 
@@ -19,13 +19,15 @@ class Spaceship extends GameObject{
         this.div = document.createElement("spaceship");
         parent.appendChild(this.div);
 
+        this.hitpointsdiv = document.createElement("hitpoints");
+        parent.appendChild(this.hitpointsdiv);
+
         this.speed = 5;
         this.hitpoints = 10;
         this.x = 200;
         this.y = 200;
         this.height = 63;
         this.width = 83;
-
         this.behaviour = new Moving(this.speed, this);
 
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e));

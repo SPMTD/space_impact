@@ -109,6 +109,8 @@ var Spaceship = (function (_super) {
         var _this = _super.call(this) || this;
         _this.div = document.createElement("spaceship");
         parent.appendChild(_this.div);
+        _this.hitpointsdiv = document.createElement("hitpoints");
+        parent.appendChild(_this.hitpointsdiv);
         _this.speed = 5;
         _this.hitpoints = 10;
         _this.x = 200;
@@ -218,6 +220,7 @@ var Game = (function () {
     Game.prototype.gameLoop = function () {
         var _this = this;
         this.spaceship.draw();
+        document.getElementById("hitpoints").innerHTML = Spaceship.prototype.hitpoints + " HP";
         for (var _i = 0, _a = this.bullet; _i < _a.length; _i++) {
             var b = _a[_i];
             b.move();

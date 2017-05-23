@@ -7,6 +7,7 @@ class Game {
 
     private spaceship : Spaceship;
     private bullet : Array<Bullet> = new Array<Bullet>();
+    // private hitpoints = document.getElementById("hitpoints");
     public static instance: Game;
     private container = document.getElementById("container");
 
@@ -30,7 +31,7 @@ class Game {
      */
     private gameLoop(){
         this.spaceship.draw();
-
+        document.getElementById("hitpoints").innerHTML = Spaceship.prototype.hitpoints + " HP";
         for (let b of this.bullet) {
             b.move();
             b.draw();
