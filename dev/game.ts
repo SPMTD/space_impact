@@ -1,18 +1,22 @@
 /// <reference path="spaceship.ts" />
 /// <reference path="bullet.ts" />
 /// <reference path="utils.ts" />
+/// <reference path="enemies.ts" />
+
 
 
 class Game {
 
     private spaceship : Spaceship;
     private bullet : Array<Bullet> = new Array<Bullet>();
+    private enemy : Enemies;
     // private hitpoints = document.getElementById("hitpoints");
     public static instance: Game;
     private container = document.getElementById("container");
 
     constructor() {
         this.spaceship = new Spaceship(this.container);
+        this.enemy = new Enemies(this.container);
 
         requestAnimationFrame(() => this.gameLoop());
     }
@@ -31,7 +35,7 @@ class Game {
      */
     private gameLoop(){
         this.spaceship.draw();
-        document.getElementById("hitpoints").innerHTML = Spaceship.prototype.hitpoints + " HP";
+        this.enemy.draw();
         for (let b of this.bullet) {
             b.move();
             b.draw();

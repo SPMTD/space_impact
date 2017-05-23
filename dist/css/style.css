@@ -36,6 +36,12 @@ bullet {
 
 hitpoints {
     color: black;
+    height: 100px;
+    width: 100px;
+}
+
+enemy {
+    background-image: url("../images/enemy1.png");
     height: 50px;
     width: 50px;
 }

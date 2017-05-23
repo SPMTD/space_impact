@@ -71,5 +71,6 @@ class Spaceship extends GameObject{
 
     public draw():void {
         this.behaviour.draw(this);
+        this.hitpointsdiv.innerHTML = this.hitpoints + " HP";
     }
 }
