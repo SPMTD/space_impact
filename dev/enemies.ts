@@ -1,16 +1,22 @@
 class Enemies extends GameObject {
     
     public behaviour: Behaviour
+    private randomY: number;
 
     constructor(parent: HTMLElement) {
         super();
         this.div = document.createElement("enemy");
         parent.appendChild(this.div);
-        this.speed = 1;
-        this.x = 300;
-        this.y = 300;
-        this.height = 100;
-        this.width = 100;
+
+        this.randomY = Math.floor(Math.random() * 500) + 1;
+
+        this.speed = 2;
+        this.x = 200;
+        this.y = 200;
+
+
+        this.height = 25;
+        this.width = 40;
         this.hitpoints = 1;
         this.behaviour = new Moving(this.speed, this);
     }

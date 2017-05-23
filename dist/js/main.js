@@ -176,11 +176,12 @@ var Enemies = (function (_super) {
         var _this = _super.call(this) || this;
         _this.div = document.createElement("enemy");
         parent.appendChild(_this.div);
-        _this.speed = 1;
-        _this.x = 300;
-        _this.y = 300;
-        _this.height = 100;
-        _this.width = 100;
+        _this.randomY = Math.floor(Math.random() * 500) + 1;
+        _this.speed = 2;
+        _this.x = 200;
+        _this.y = 200;
+        _this.height = 25;
+        _this.width = 40;
         _this.hitpoints = 1;
         _this.behaviour = new Moving(_this.speed, _this);
         return _this;
@@ -219,9 +220,13 @@ var Game = (function () {
     function Game() {
         var _this = this;
         this.bullet = new Array();
+        this.enemies = new Array();
         this.container = document.getElementById("container");
         this.spaceship = new Spaceship(this.container);
-        this.enemy = new Enemies(this.container);
+        setInterval(function () {
+            _this.enemies.push(new Enemies(_this.container));
+            _this.enemyCounter++;
+        }, 5000);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
     Game.prototype.createBullet = function (b) {
@@ -230,13 +235,18 @@ var Game = (function () {
     Game.prototype.gameLoop = function () {
         var _this = this;
         this.spaceship.draw();
-        this.enemy.draw();
         for (var _i = 0, _a = this.bullet; _i < _a.length; _i++) {
             var b = _a[_i];
             b.move();
             b.draw();
             if (b.y < 0 || b.y > 800 || b.x < 0 || b.x > 600) {
                 b.removeMe();
+            }
+        }
+        for (var _b = 0, _c = this.enemies; _b < _c.length; _b++) {
+            var e = _c[_b];
+            if (e.x < 0) {
+                e.removeMe();
             }
         }
         requestAnimationFrame(function () { return _this.gameLoop(); });
