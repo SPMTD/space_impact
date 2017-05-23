@@ -1,40 +1,27 @@
 class Enemies extends GameObject {
     
-    private gameobject: GameObject; 
-    public div: HTMLElement;
-    public height: number;
-    public width: number;   
-    public hitpoints: number;
-
-    public behaviour: Behaviour;
+    public behaviour: Behaviour
 
     constructor(parent: HTMLElement) {
         super();
-
         this.div = document.createElement("enemy");
         parent.appendChild(this.div);
-
-        this.speed = 3;
-        this.x = 400;
-        this.y = 200;
-        this.height = 50;
-        this.width = 50;
-
+        this.speed = 1;
+        this.x = 300;
+        this.y = 300;
+        this.height = 100;
+        this.width = 100;
+        this.hitpoints = 1;
         this.behaviour = new Moving(this.speed, this);
-    }
-
-    public gotHit(hit: boolean): void {
-        if(hit) {
-            this.hitpoints -= 1;
-        }
-    }
-
-    public move(): void {
-        this.behaviour.move(this, this.speed);
     }
 
     public draw(): void {
         this.behaviour.draw(this);
+
+    }
+
+    public move(): void {
+        this.behaviour.move(this, this.speed);
     }
 
 }

@@ -2,6 +2,7 @@ class Moving implements Behaviour {
     private speed: number;
 
     public spaceship: Spaceship;
+    public enemy: Enemies;
 
     constructor(s: number, object) {
         this.speed = s;

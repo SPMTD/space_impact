@@ -176,24 +176,20 @@ var Enemies = (function (_super) {
         var _this = _super.call(this) || this;
         _this.div = document.createElement("enemy");
         parent.appendChild(_this.div);
-        _this.speed = 3;
-        _this.x = 400;
-        _this.y = 200;
-        _this.height = 50;
-        _this.width = 50;
+        _this.speed = 1;
+        _this.x = 300;
+        _this.y = 300;
+        _this.height = 100;
+        _this.width = 100;
+        _this.hitpoints = 1;
         _this.behaviour = new Moving(_this.speed, _this);
         return _this;
     }
-    Enemies.prototype.gotHit = function (hit) {
-        if (hit) {
-            this.hitpoints -= 1;
-        }
+    Enemies.prototype.draw = function () {
+        this.behaviour.draw(this);
     };
     Enemies.prototype.move = function () {
         this.behaviour.move(this, this.speed);
-    };
-    Enemies.prototype.draw = function () {
-        this.behaviour.draw(this);
     };
     return Enemies;
 }(GameObject));

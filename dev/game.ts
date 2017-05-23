@@ -36,6 +36,7 @@ class Game {
     private gameLoop(){
         this.spaceship.draw();
         this.enemy.draw();
+
         for (let b of this.bullet) {
             b.move();
             b.draw();
