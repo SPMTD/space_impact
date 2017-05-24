@@ -5,6 +5,9 @@ Space impact is een oud spel dat vroeger gespeeld kon worden op de nokia telefoo
 Ik heb dat vroeger veel gespeeld en vroeg me af of ik het ook kon maken.
 Dit project is gestart als project voor PRG08.
 
+## UML Classdiagram 
+![alt tag](http://imgur.com/a/ww5Z5)<br />
+
 ## installatie
 Om dit spel te installeren clone / download je deze repository.
 
