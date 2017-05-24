@@ -1,10 +1,15 @@
+/// <reference path="enemies.ts" />
+
+
 class Moving implements Behaviour {
     private speed: number;
 
+    public gameObject: GameObject;
     public spaceship: Spaceship;
     public enemy: Enemies;
+    public object: GameObject;
 
-    constructor(s: number, object) {
+    constructor(s: number, GameObject) {
         this.speed = s;
     }
 
@@ -20,7 +25,7 @@ class Moving implements Behaviour {
         object.y = object.y + speed;
     }
 
-    public draw(object) {
-        object.div.style.transform = "translate(" + object.y + "px, " + object.x + "px)";
+    public draw(gameObject) {
+        gameObject.div.style.transform = "translate(" + gameObject.y + "px, " + gameObject.x + "px)";
     }
 }

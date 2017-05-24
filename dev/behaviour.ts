@@ -1,5 +1,5 @@
 interface Behaviour {
-    spaceship: Spaceship;
+    gameObject: GameObject;
     draw(object): void;
     move(object, speed): void;
     onKeyDown(e: KeyboardEvent): void;

@@ -5,7 +5,7 @@
 
 
 class Spaceship extends GameObject{
-    private gameobject: GameObject;
+    private gameObject: GameObject;
     public div: HTMLElement;
     private bullet: Bullet;
     public width: number;

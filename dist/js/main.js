@@ -87,8 +87,32 @@ var GameObject = (function () {
     });
     return GameObject;
 }());
+var Enemies = (function (_super) {
+    __extends(Enemies, _super);
+    function Enemies(parent) {
+        var _this = _super.call(this) || this;
+        _this.div = document.createElement("enemy");
+        parent.appendChild(_this.div);
+        _this.randomX = Math.floor(Math.random() * 500) + 1;
+        _this.speed = -2;
+        _this.x = _this.randomX;
+        _this.y = 775;
+        _this.height = 25;
+        _this.width = 40;
+        _this.hitpoints = 1;
+        _this.behaviour = new Moving(_this.speed, _this);
+        return _this;
+    }
+    Enemies.prototype.move = function () {
+        this.behaviour.move(this, this.speed);
+    };
+    Enemies.prototype.draw = function () {
+        this.behaviour.draw(this);
+    };
+    return Enemies;
+}(GameObject));
 var Moving = (function () {
-    function Moving(s, object) {
+    function Moving(s, GameObject) {
         this.speed = s;
     }
     Moving.prototype.onKeyDown = function (e) {
@@ -98,8 +122,8 @@ var Moving = (function () {
     Moving.prototype.move = function (object, speed) {
         object.y = object.y + speed;
     };
-    Moving.prototype.draw = function (object) {
-        object.div.style.transform = "translate(" + object.y + "px, " + object.x + "px)";
+    Moving.prototype.draw = function (gameObject) {
+        gameObject.div.style.transform = "translate(" + gameObject.y + "px, " + gameObject.x + "px)";
     };
     return Moving;
 }());
@@ -155,8 +179,8 @@ var Bullet = (function (_super) {
     function Bullet(parent, x, y) {
         var _this = _super.call(this) || this;
         _this.speed = 10;
-        _this.x = x * 1.151;
-        _this.y = y * 1.35;
+        _this.x = x + 30;
+        _this.y = y + 60;
         _this._div = document.createElement("bullet");
         parent.appendChild(_this.div);
         _this.behaviour = new Moving(_this.speed, _this);
@@ -169,30 +193,6 @@ var Bullet = (function (_super) {
         this.behaviour.draw(this);
     };
     return Bullet;
-}(GameObject));
-var Enemies = (function (_super) {
-    __extends(Enemies, _super);
-    function Enemies(parent) {
-        var _this = _super.call(this) || this;
-        _this.div = document.createElement("enemy");
-        parent.appendChild(_this.div);
-        _this.randomY = Math.floor(Math.random() * 500) + 1;
-        _this.speed = 2;
-        _this.x = 200;
-        _this.y = 200;
-        _this.height = 25;
-        _this.width = 40;
-        _this.hitpoints = 1;
-        _this.behaviour = new Moving(_this.speed, _this);
-        return _this;
-    }
-    Enemies.prototype.draw = function () {
-        this.behaviour.draw(this);
-    };
-    Enemies.prototype.move = function () {
-        this.behaviour.move(this, this.speed);
-    };
-    return Enemies;
 }(GameObject));
 var Utils = (function () {
     function Utils() {
@@ -213,14 +213,18 @@ var Game = (function () {
         this.enemies = new Array();
         this.container = document.getElementById("container");
         this.spaceship = new Spaceship(this.container);
-        setInterval(function () {
-            _this.enemies.push(new Enemies(_this.container));
-            _this.enemyCounter++;
-        }, 5000);
+        this.createEnemie(this.enemie);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
     Game.prototype.createBullet = function (b) {
         this.bullet.push(b);
+    };
+    Game.prototype.createEnemie = function (e) {
+        var _this = this;
+        setInterval(function () {
+            var e = new Enemies(_this.container);
+            _this.enemies.push(e);
+        }, 2500);
     };
     Game.prototype.gameLoop = function () {
         var _this = this;
@@ -235,7 +239,9 @@ var Game = (function () {
         }
         for (var _b = 0, _c = this.enemies; _b < _c.length; _b++) {
             var e = _c[_b];
-            if (e.x < 0) {
+            e.move();
+            e.draw();
+            if (e.x < 0 || e.y < 0) {
                 e.removeMe();
             }
         }

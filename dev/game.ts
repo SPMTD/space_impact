@@ -9,7 +9,7 @@ class Game {
 
     private spaceship : Spaceship;
     private bullet : Array<Bullet> = new Array<Bullet>();
-    private enemy : Enemies;
+    private enemie: Enemies;
     private enemies: Array<Enemies> = new Array<Enemies>();
     // private hitpoints = document.getElementById("hitpoints");
     public static instance: Game;
@@ -21,10 +21,7 @@ class Game {
     constructor() {
         this.spaceship = new Spaceship(this.container);
 
-        setInterval(() => {
-            this.enemies.push(new Enemies(this.container))
-            this.enemyCounter++;
-        }, 5000);
+        this.createEnemie(this.enemie);
 
         requestAnimationFrame(() => this.gameLoop());
     }
@@ -37,6 +34,13 @@ class Game {
         this.bullet.push(b);
     }
 
+    public createEnemie(e: Enemies) {
+        setInterval(() => {
+            let e = new Enemies(this.container);
+            this.enemies.push(e);
+            
+        }, 2500);
+    }
 
     /**
      * GameLoop
@@ -53,7 +57,9 @@ class Game {
         }
 
         for (let e of this.enemies) {
-            if(e.x < 0) {
+            e.move();
+            e.draw();
+            if(e.x < 0 || e.y < 0 ) {
                 e.removeMe();
             }
         }
