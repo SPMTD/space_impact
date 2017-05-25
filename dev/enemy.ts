@@ -3,7 +3,7 @@
 /// <reference path="behaviour.ts" />
 /// <reference path="moving.ts" />
 
-class Enemies extends GameObject {
+class Enemy extends GameObject {
     
     private gameObject: GameObject;
     private behaviour: Behaviour
@@ -38,6 +38,10 @@ class Enemies extends GameObject {
 
     public draw(): void {
         this.behaviour.draw(this);
+    }
+
+    public test(){
+        
     }
 
 }
