@@ -1,4 +1,4 @@
-class GameObject {
+abstract class GameObject {
 
     protected _speed: number;
     protected _div: HTMLElement;
@@ -20,6 +20,12 @@ class GameObject {
      */
     public removeMe(): void {
         this.div.remove();
+    }
+
+    public draw(): void {
+    }
+
+    public move(): void {
     }
 
     public get height(): number {
@@ -73,7 +79,7 @@ class GameObject {
     public set speed(v: number) {
         this._speed = v;
     }
-    
+
     public get hitpoints(): number {
         return this._hitpoints;
     }

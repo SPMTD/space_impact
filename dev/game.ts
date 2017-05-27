@@ -1,17 +1,17 @@
 /// <reference path="spaceship.ts" />
 /// <reference path="bullet.ts" />
 /// <reference path="utils.ts" />
-/// <reference path="enemies.ts" />
+/// <reference path="enemy.ts" />
 
 
 
 class Game {
 
-    private spaceship : Spaceship;
-    private bullet : Array<Bullet> = new Array<Bullet>();
-    private enemie: Enemies;
-    private enemies: Array<Enemies> = new Array<Enemies>();
-    // private hitpoints = document.getElementById("hitpoints");
+    private spaceship: Spaceship;
+    private bullets: Array<Bullet> = new Array<Bullet>();
+    private enemy: Enemy;
+    private enemies: Array<Enemy> = new Array<Enemy>();
+    private gameObjects: Array<GameObject> = new Array<GameObject>();
     public static instance: Game;
     private container = document.getElementById("container");
 
@@ -19,49 +19,34 @@ class Game {
     private enemyCounter: number;
 
     constructor() {
-        this.spaceship = new Spaceship(this.container);
+        this.gameObjects.push(new Spaceship(this.container));
+        setInterval(() => {
+            this.gameObjects.push(new Enemy(this.container));
 
-        this.createEnemie(this.enemie);
+        }, 1000);
+
 
         requestAnimationFrame(() => this.gameLoop());
+
     }
 
     /**
      * Creates bullet when player presses space.
      * @param b 
      */
-    public createBullet(b: Bullet) {
-        this.bullet.push(b);
-    }
-
-    public createEnemie(e: Enemies) {
-        setInterval(() => {
-            let e = new Enemies(this.container);
-            this.enemies.push(e);
-            
-        }, 2500);
+    public createBullet() {
+        let spaceShips = this.gameObjects[0];
+        this.gameObjects.push(new Bullet(this.container, spaceShips.x, spaceShips.y));
     }
 
     /**
      * GameLoop
      */
-    private gameLoop(){
-        this.spaceship.draw();
+    private gameLoop() {
 
-        for (let b of this.bullet) {
-            b.move();
-            b.draw();
-            if (b.y < 0 || b.y > 800 || b.x < 0 || b.x > 600) {
-                b.removeMe();
-            }
-        }
-
-        for (let e of this.enemies) {
-            e.move();
-            e.draw();
-            if(e.x < 0 || e.y < 0 ) {
-                e.removeMe();
-            }
+        for (let g of this.gameObjects) {
+            g.move();
+            g.draw();
         }
 
         requestAnimationFrame(() => this.gameLoop());
@@ -71,15 +56,15 @@ class Game {
      * Usage of singleton to create Game instance.
      */
     public static getInstance() {
-        if(!Game.instance) {
+        if (!Game.instance) {
             Game.instance = new Game();
         }
         return Game.instance;
     }
-} 
+}
 
 
 // load
-window.addEventListener("load", function() {
-    let g:Game = Game.getInstance();
+window.addEventListener("load", function () {
+    let g: Game = Game.getInstance();
 });

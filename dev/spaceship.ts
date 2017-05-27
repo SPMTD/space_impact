@@ -4,7 +4,8 @@
 /// <reference path="moving.ts" />
 
 
-class Spaceship extends GameObject{
+
+class Spaceship extends GameObject {
     private gameObject: GameObject;
     public div: HTMLElement;
     private bullet: Bullet;
@@ -22,7 +23,7 @@ class Spaceship extends GameObject{
         this.hitpointsdiv = document.createElement("hitpoints");
         parent.appendChild(this.hitpointsdiv);
 
-        this.speed = 5;
+        this.speed = 10;
         this.hitpoints = 10;
         this.x = 200;
         this.y = 200;
@@ -39,37 +40,41 @@ class Spaceship extends GameObject{
      * Sprite movement.
      * @param e 
      */
-    private onKeyDown(e: KeyboardEvent):void {
+    private onKeyDown(e: KeyboardEvent): void {
 
-        if(e.keyCode == 87) {
+        if (e.keyCode == 87) {
             this.x = this.x - this.speed;
         }
-        else if(e.keyCode == 83) {
-            this.x = this.x + this.speed;            
+        else if (e.keyCode == 83) {
+            this.x = this.x + this.speed;
         }
-        else if(e.keyCode == 65) {
+        else if (e.keyCode == 65) {
             this.y = this.y - this.speed;
         }
-        else if(e.keyCode == 68) {
+        else if (e.keyCode == 68) {
             this.y = this.y + this.speed;
         }
-        else if(e.keyCode == 32) {
-            let b = new Bullet(this.container, this.x, this.y);
-            Game.getInstance().createBullet(b);
+        else if (e.keyCode == 32) {
+            Game.getInstance().createBullet();
         }
 
+    }
+
+
+    public test() {
+        console.log("test");
     }
 
     /**
      * Checks if player let go of keys.
      * @param e 
      */
-    private onKeyUp(e: KeyboardEvent) :void {
-        if(this.onKeyUp) {
+    private onKeyUp(e: KeyboardEvent): void {
+        if (this.onKeyUp) {
         }
     }
 
-    public draw():void {
+    public draw(): void {
         this.behaviour.draw(this);
         this.hitpointsdiv.innerHTML = this.hitpoints + " HP";
     }
