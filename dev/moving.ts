@@ -1,4 +1,4 @@
-/// <reference path="enemies.ts" />
+/// <reference path="enemy.ts" />
 
 
 class Moving implements Behaviour {
@@ -6,7 +6,7 @@ class Moving implements Behaviour {
 
     public gameObject: GameObject;
     public spaceship: Spaceship;
-    public enemy: Enemies;
+    public enemy: Enemy;
     public object: GameObject;
 
     constructor(s: number, GameObject) {

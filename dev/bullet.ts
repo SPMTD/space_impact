@@ -4,6 +4,7 @@ class Bullet extends GameObject {
     private gameObject: GameObject;
     private spaceship: Spaceship;
     private behaviour: Behaviour;
+    protected _speed: number;
 
     constructor(parent: HTMLElement, x: number, y: number) {
         super();
@@ -14,7 +15,7 @@ class Bullet extends GameObject {
         this.width = 30;
 
         this._div = document.createElement("bullet");
-        parent.appendChild(this.div);
+        parent.appendChild(this._div);
 
         this.behaviour = new Moving(this.speed, this);
 

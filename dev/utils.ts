@@ -1,5 +1,8 @@
 
 class Utils {
+    private x: number;
+    private y: number;
+
     public static checkCollision(object1: GameObject, object2: GameObject): boolean {
 
         return (object1.x < object2.x + object2.width &&

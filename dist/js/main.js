@@ -91,9 +91,9 @@ var GameObject = (function () {
     });
     return GameObject;
 }());
-var Enemies = (function (_super) {
-    __extends(Enemies, _super);
-    function Enemies(parent) {
+var Enemy = (function (_super) {
+    __extends(Enemy, _super);
+    function Enemy(parent) {
         var _this = _super.call(this) || this;
         _this.div = document.createElement("enemy");
         parent.appendChild(_this.div);
@@ -107,15 +107,15 @@ var Enemies = (function (_super) {
         _this.behaviour = new Moving(_this.speed, _this);
         return _this;
     }
-    Enemies.prototype.move = function () {
+    Enemy.prototype.move = function () {
         this.behaviour.move(this, this.speed);
     };
-    Enemies.prototype.draw = function () {
+    Enemy.prototype.draw = function () {
         this.behaviour.draw(this);
     };
-    Enemies.prototype.test = function () {
+    Enemy.prototype.test = function () {
     };
-    return Enemies;
+    return Enemy;
 }(GameObject));
 var Moving = (function () {
     function Moving(s, GameObject) {
@@ -215,32 +215,6 @@ var Utils = (function () {
     };
     return Utils;
 }());
-var Enemy = (function (_super) {
-    __extends(Enemy, _super);
-    function Enemy(parent) {
-        var _this = _super.call(this) || this;
-        _this.div = document.createElement("enemy");
-        parent.appendChild(_this.div);
-        _this.randomX = Math.floor(Math.random() * 500) + 1;
-        _this.speed = -2;
-        _this.x = _this.randomX;
-        _this.y = 775;
-        _this.height = 25;
-        _this.width = 40;
-        _this.hitpoints = 1;
-        _this.behaviour = new Moving(_this.speed, _this);
-        return _this;
-    }
-    Enemy.prototype.move = function () {
-        this.behaviour.move(this, this.speed);
-    };
-    Enemy.prototype.draw = function () {
-        this.behaviour.draw(this);
-    };
-    Enemy.prototype.test = function () {
-    };
-    return Enemy;
-}(GameObject));
 var Game = (function () {
     function Game() {
         var _this = this;
@@ -252,6 +226,7 @@ var Game = (function () {
         setInterval(function () {
             _this.gameObjects.push(new Enemy(_this.container));
         }, 1000);
+        var enemy = this.gameObjects[2];
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
     Game.prototype.createBullet = function () {
@@ -264,6 +239,12 @@ var Game = (function () {
             var g = _a[_i];
             g.move();
             g.draw();
+            if (g.y < 0 || g.y > 900) {
+                g.removeMe();
+            }
+            if (Utils.checkCollision(this.gameObjects[0], this.gameObjects[2])) {
+                console.log("HITTIHIEHFLSDH");
+            }
         }
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };

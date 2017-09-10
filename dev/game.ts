@@ -26,6 +26,8 @@ class Game {
         }, 1000);
 
 
+        let enemy = this.gameObjects[2];
+
         requestAnimationFrame(() => this.gameLoop());
 
     }
@@ -47,6 +49,14 @@ class Game {
         for (let g of this.gameObjects) {
             g.move();
             g.draw();
+
+            if(g.y < 0 || g.y > 900) {
+                g.removeMe();
+            }
+            
+            if(Utils.checkCollision(this.gameObjects[0], this.gameObjects[2])) {
+                console.log("HITTIHIEHFLSDH");
+            }
         }
 
         requestAnimationFrame(() => this.gameLoop());
